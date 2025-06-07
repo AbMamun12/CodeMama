@@ -2,26 +2,37 @@ import 'dart:io';
 
 void main(){
   var input = stdin.readLineSync()!;
+  //print(input);  // 101 2
 
-  if (input == "31231"){
-    print("Banana");
+  var data = input.split(" ");
+  var productId = data [0];
+  int quantity = int.parse(data [1]);
+
+
+int price =0;
+/*  if(productId == "101"){
+    price= 10;
   }
-  else if (input == "43861"){
-    print("Elderberry");
+  else if (productId == "202"){
+    price =25;
   }
-  else if (input == "82678"){
-    print("Honeydew Melon");
-  }  else if (input == "23456"){
-    print("Apple");
-  }  else if (input == "78901"){
-    print("Mango");
-  }  else if (input == "98765"){
-    print("Nectarine");
-  }  else if (input == "67890"){
-    print("Raspberry");
-  }  else if (input == "21098"){
-    print("Tangerine");
-  }  else if (input == "45678"){
-    print("Orange");
+  else if (productId == "303"){
+    price =5;
+  } */
+
+  switch (productId){
+    case "101":
+      price = 10;
+      break;
+    case "202":
+      price = 25;
+      break;
+    case "303":
+    price = 5;
+    break;
   }
+
+  int totalCost = price * quantity;
+  print(totalCost);
+
 }
