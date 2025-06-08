@@ -1,96 +1,40 @@
-/* একটি ডুপ্লিকেট শুধু একবার প্রিন্ট করার জন্য
 import 'dart:io';
 
-void main() {
-  // প্রথম লাইনে সংখ্যা N ইনপুট
-  int n = int.parse(stdin.readLineSync()!);
+/* void main() { // যদি নিউমেরিক সংখ্যা হিসাবে না ধরা হয়
+  var str = stdin.readLineSync()!.trim();
+  int letterCount = 0;
 
-  // দ্বিতীয় লাইনের ইনপুট থেকে শুধু প্রথম Nটি সংখ্যা নেওয়া হবে
-  List<String> inputNumbers = stdin.readLineSync()!.split(' ');
-  List<int> numbers = inputNumbers.take(n).map(int.parse).toList();
+  for (int i = 0; i < str.length; i++) {
+    var ch = str[i];
+    stdout.write(ch);  // যাই হোক না কেন, ক্যারেক্টারটা আগে প্রিন্ট করবো
 
-  Set<int> seen = {};
+    if (RegExp(r'[a-zA-Z]').hasMatch(ch)) {
+      letterCount++;
 
-  for (int num in numbers) {
-    if (seen.contains(num)) {
-      print(num); // ডুপ্লিকেট পাওয়া গেলে প্রিন্ট করে বের হয়ে যাবে
-      return;
+      if (letterCount % 2 == 0) {
+        stdout.write('x');  // প্রতি দুই অক্ষরের পর x বসাবে
+      }
     }
-    seen.add(num);
   }
-
-  // যদি কোন ডুপ্লিকেট না পাওয়া যায়
-  print("no duplicate found");
 }*/
-import 'dart:io';
-
-/*import 'dart:io';
-
-// একটি ডুপ্লিকেট শুধু একবার প্রিন্ট করার জন্য
-void main() {
-  var input1 = stdin.readLineSync()!;
-  var input2 = stdin.readLineSync()!;
-
-  int n = int.parse(input1);
-  var data = input2.split(" ");
-
-  bool found = false;
-
-  for (int i = 0; i < n - 1; i++) {
-    for (int j = i + 1; j < n; j++) {
-      if (data[i] == data[j]) {
-        print(data[i]);
-        found = true;
-        break;
-      }
-    }
-    if (found) {
-      break;
-    }
-  }
-
-  if (!found) {
-    print("No duplicate");
-  }
-}
-*/
-
-// একাধিক ডুপ্লিকেট থাকলে সবগুলোই প্রিন্ট করবে
 
 void main() {
-  var input1 = stdin.readLineSync()!;
-  var input2 = stdin.readLineSync()!;
+  var str = stdin.readLineSync()!.trim();
+  int count = 0;
 
-  int n = int.parse(input1);
-  var data = input2.split(" ");
+  for (int i = 0; i < str.length; i++) {
+    stdout.write(str[i]);
+    count++;
 
-  List<String> printed = []; // যাতে একই ডুপ্লিকেট বারবার না প্রিন্ট হয়
-  bool found = false;
-
-  for (int i = 0; i < n - 1; i++) {
-    for (int j = i + 1; j < n; j++) {
-      if (data[i] == data[j]) {
-        // যদি আগেই প্রিন্ট করা হয়ে থাকে তাহলে আর প্রিন্ট করব না
-        bool alreadyPrinted = false;
-        for (int k = 0; k < printed.length; k++) {
-          if (printed[k] == data[i]) {
-            alreadyPrinted = true;
-            break;
-          }
-        }
-
-        if (!alreadyPrinted) {
-          print(data[i]);
-          printed.add(data[i]);
-          found = true;
-        }
-        break; // একবার মিলে গেলে বাহিরে যাবো, কিন্তু i লুপ চলবে
-      }
+    if (count % 2 == 0) {
+      stdout.write('x');
     }
   }
-
-  if (!found) {
-    print("No duplicate");
-  }
 }
+
+
+
+
+
+
 
