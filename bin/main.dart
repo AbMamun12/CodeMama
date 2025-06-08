@@ -1,96 +1,24 @@
-/* একটি ডুপ্লিকেট শুধু একবার প্রিন্ট করার জন্য
 import 'dart:io';
 
 void main() {
-  // প্রথম লাইনে সংখ্যা N ইনপুট
-  int n = int.parse(stdin.readLineSync()!);
+  var str = stdin.readLineSync()!.trim();  // ইউজারের ইনপুট নিচ্ছে এবং সামনের-পেছনের স্পেস কেটে নিচ্ছে
+  int letterCount = 0;                     // অক্ষর গোনার জন্য একটা কাউন্টার
 
-  // দ্বিতীয় লাইনের ইনপুট থেকে শুধু প্রথম Nটি সংখ্যা নেওয়া হবে
-  List<String> inputNumbers = stdin.readLineSync()!.split(' ');
-  List<int> numbers = inputNumbers.take(n).map(int.parse).toList();
+  for (int i = 0; i < str.length; i++) {   // স্ট্রিংয়ের প্রতিটি ক্যারেক্টারের উপর লুপ
+    var ch = str[i];                       // বর্তমান ক্যারেক্টার
 
-  Set<int> seen = {};
+    if (RegExp(r'[a-zA-Z]').hasMatch(ch)) {   // যদি ক্যারেক্টারটা ইংরেজি অক্ষর হয়
+      letterCount++;                          // তাহলে অক্ষর গণনায় যোগ হবে
 
-  for (int num in numbers) {
-    if (seen.contains(num)) {
-      print(num); // ডুপ্লিকেট পাওয়া গেলে প্রিন্ট করে বের হয়ে যাবে
-      return;
-    }
-    seen.add(num);
-  }
-
-  // যদি কোন ডুপ্লিকেট না পাওয়া যায়
-  print("no duplicate found");
-}*/
-import 'dart:io';
-
-/*import 'dart:io';
-
-// একটি ডুপ্লিকেট শুধু একবার প্রিন্ট করার জন্য
-void main() {
-  var input1 = stdin.readLineSync()!;
-  var input2 = stdin.readLineSync()!;
-
-  int n = int.parse(input1);
-  var data = input2.split(" ");
-
-  bool found = false;
-
-  for (int i = 0; i < n - 1; i++) {
-    for (int j = i + 1; j < n; j++) {
-      if (data[i] == data[j]) {
-        print(data[i]);
-        found = true;
-        break;
+      if (letterCount % 3 == 0) {             // যদি এটা ৩ দিয়ে ভাগ যায় (মানে প্রতি তৃতীয় অক্ষর)
+        stdout.write(ch.toUpperCase());       // তাহলে এটা Uppercase করে প্রিন্ট করো
+      } else {
+        stdout.write(ch);                     // না হলে যেরকম আছে সেরকমই প্রিন্ট করো
       }
-    }
-    if (found) {
-      break;
-    }
-  }
 
-  if (!found) {
-    print("No duplicate");
+    } else {
+      // যদি অক্ষর না হয় (মানে সংখ্যা বা অন্য symbol), তাহলে সরাসরি প্রিন্ট করো, গোনায় ধরবে না
+      stdout.write(ch);
+    }
   }
 }
-*/
-
-// একাধিক ডুপ্লিকেট থাকলে সবগুলোই প্রিন্ট করবে
-
-void main() {
-  var input1 = stdin.readLineSync()!;
-  var input2 = stdin.readLineSync()!;
-
-  int n = int.parse(input1);
-  var data = input2.split(" ");
-
-  List<String> printed = []; // যাতে একই ডুপ্লিকেট বারবার না প্রিন্ট হয়
-  bool found = false;
-
-  for (int i = 0; i < n - 1; i++) {
-    for (int j = i + 1; j < n; j++) {
-      if (data[i] == data[j]) {
-        // যদি আগেই প্রিন্ট করা হয়ে থাকে তাহলে আর প্রিন্ট করব না
-        bool alreadyPrinted = false;
-        for (int k = 0; k < printed.length; k++) {
-          if (printed[k] == data[i]) {
-            alreadyPrinted = true;
-            break;
-          }
-        }
-
-        if (!alreadyPrinted) {
-          print(data[i]);
-          printed.add(data[i]);
-          found = true;
-        }
-        break; // একবার মিলে গেলে বাহিরে যাবো, কিন্তু i লুপ চলবে
-      }
-    }
-  }
-
-  if (!found) {
-    print("No duplicate");
-  }
-}
-
